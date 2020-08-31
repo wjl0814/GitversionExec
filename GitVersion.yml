@@ -25,7 +25,7 @@ branches:
     tracks-release-branches: false
     is-release-branch: true
   develop:
-    regex: f(eatures)?[-/]
+    regex: dev(elop)?[-/]
     mode: ContinuousDeployment
     tag: alpha
     increment: Minor

@@ -1,8 +1,35 @@
-mode: ContinuousDeployment
 next-version: 0.1.0
-branches:
-  develop:
-    mode: ContinuousDeployment
+mode: ContinuousDelivery
+increment: Inherit
+tag-prefix: "[vV]"
 ignore:
   sha: []
-merge-message-formats: {}
+  commits-before: 2020-08-31T00:00:00
+branches:
+  master:
+    regex: master$
+    mode: ContinuousDelivery
+    tag: ""
+    increment: Patch
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: true
+  release:
+    regex: r(elease$|(eleases)?[-/])
+    mode: ContinuousDelivery
+    tag: beta
+    increment: Patch
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: true
+  develop:
+    regex: f(eatures)?[-/]
+    mode: ContinuousDeployment
+    tag: alpha
+    increment: Minor
+    prevent-increment-of-merged-branch-version: false
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: false

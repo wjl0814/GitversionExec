@@ -1,4 +1,4 @@
-next-version: 1.0.0
+next-version: 1.0.3
 ignore:
   sha: []
   commits-before: 2020-08-31T00:00:00
@@ -14,7 +14,7 @@ branches:
     is-release-branch: true
 
   release:
-    regex: r(elease$|(eleases)?[-/])
+    regex: ^release[-/]
     mode: ContinuousDelivery
     tag: beta
     increment: Patch

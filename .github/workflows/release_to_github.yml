@@ -79,7 +79,7 @@ jobs:
       
       - uses: actions/upload-artifact@v1
         with:
-          name: "GitversionExec-${{ steps.gitversion.outputs.fullSemVer }}"
+          name: "GitversionExec-${{ steps.gitversion.outputs.semVer }}"
           path: gitversion_exec.7z
           
       - name: Upload binaries to release

@@ -1,4 +1,4 @@
-next-version: 1.0.3
+next-version: 1.1.0
 ignore:
   sha: []
   commits-before: 2020-08-31T00:00:00
@@ -6,7 +6,7 @@ branches:
   master:
     regex: ^master$|^main$
     mode: ContinuousDelivery
-    tag: ''
+    tag: ""
     increment: Patch
     prevent-increment-of-merged-branch-version: true
     track-merge-target: false
@@ -32,4 +32,3 @@ branches:
     track-merge-target: false
     tracks-release-branches: false
     is-release-branch: false
-

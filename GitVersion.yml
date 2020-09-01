@@ -7,45 +7,28 @@ ignore:
   commits-before: 2020-08-31T00:00:00
 branches:
   master:
-    regex: master$
+    regex: ^master$|^main$
     mode: ContinuousDelivery
-    tag: ""
-    increment: Minor
-    prevent-increment-of-merged-branch-version: true
-    track-merge-target: false
-    tracks-release-branches: false
-    is-release-branch: true
-  release:
-    regex: release(s)?[/-]
-    mode: ContinuousDelivery
-    tag: beta
-    increment: Minor
+    tag: ''
+    increment: Patch
     prevent-increment-of-merged-branch-version: true
     track-merge-target: false
     tracks-release-branches: false
     is-release-branch: true
   develop:
-    regex: develop$
+    regex: ^dev(elop)?(ment)?$
     mode: ContinuousDeployment
-    tag: alpha
+    tag: unstable
     increment: Minor
     prevent-increment-of-merged-branch-version: false
-    track-merge-target: false
-    tracks-release-branches: false
+    track-merge-target: true
+    tracks-release-branches: true
     is-release-branch: false
-  hotfix:
-    regex: hotfix(es)?[/-]
-    mode: ContinuousDelivery
-    tag: fix
-    increment: None
-    prevent-increment-of-merged-branch-version: true
-    track-merge-target: false
-    tracks-release-branches: false
-    is-release-branch: true
   feature:
-    regex: feature(s)?[/-]
+    regex: ^features?[/-]
     mode: ContinuousDeployment
     tag: useBranchName
+    increment: Inherit
     prevent-increment-of-merged-branch-version: false
     track-merge-target: false
     tracks-release-branches: false

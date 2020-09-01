@@ -25,7 +25,7 @@ branches:
     tracks-release-branches: false
     is-release-branch: true
   develop:
-    regex: dev(elop)?[-/]
+    regex: develop$
     mode: ContinuousDeployment
     tag: alpha
     increment: Minor

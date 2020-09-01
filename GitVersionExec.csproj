@@ -5,6 +5,11 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageVersion>$(PackageVersion)</PackageVersion>
     <IsPackable>true</IsPackable>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

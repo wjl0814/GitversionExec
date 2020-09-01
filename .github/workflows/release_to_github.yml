@@ -83,7 +83,7 @@ jobs:
           path: gitversion_exec.7z
           
       - name: Upload binaries to release
-        if: contains(github.ref, 'master')
+        if: contains(github.ref, 'master') || contains(github.ref, 'develop')
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}

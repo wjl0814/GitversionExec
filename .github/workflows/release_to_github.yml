@@ -89,6 +89,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: gitversion_exec.7z
           asset_name: GitversionExec.7z
-          tag: "${{ steps.gitversion.outputs.fullSemVer }}"
+          tag: "${{ steps.gitversion.outputs.semVer }}"
           overwrite: true
         

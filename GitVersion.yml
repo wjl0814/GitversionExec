@@ -1,7 +1,4 @@
 next-version: 0.1.2
-mode: ContinuousDelivery
-increment: Inherit
-tag-prefix: "[vV]"
 ignore:
   sha: []
   commits-before: 2020-08-31T00:00:00
@@ -15,22 +12,5 @@ branches:
     track-merge-target: false
     tracks-release-branches: false
     is-release-branch: true
-  develop:
-    regex: ^dev(elop)?(ment)?$
-    mode: ContinuousDeployment
-    tag: unstable
-    increment: Minor
-    prevent-increment-of-merged-branch-version: false
-    track-merge-target: true
-    tracks-release-branches: true
-    is-release-branch: false
-  feature:
-    regex: ^features?[/-]
-    mode: ContinuousDeployment
-    tag: useBranchName
-    increment: Inherit
-    prevent-increment-of-merged-branch-version: false
-    track-merge-target: false
-    tracks-release-branches: false
-    is-release-branch: false
+
 

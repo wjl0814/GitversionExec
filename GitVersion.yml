@@ -13,6 +13,16 @@ branches:
     tracks-release-branches: false
     is-release-branch: true
 
+  release:
+    regex: r(elease$|(eleases)?[-/])
+    mode: ContinuousDelivery
+    tag: beta
+    increment: Patch
+    prevent-increment-of-merged-branch-version: true
+    track-merge-target: false
+    tracks-release-branches: false
+    is-release-branch: true
+
   feature:
     regex: ^feature[-/]
     mode: ContinuousDeployment

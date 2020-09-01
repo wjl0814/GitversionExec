@@ -14,7 +14,7 @@ branches:
     is-release-branch: true
 
   feature:
-    regex: feature(s)?[-/]
+    regex: ^feature[-/]
     mode: ContinuousDeployment
     tag: alpha
     increment: Patch

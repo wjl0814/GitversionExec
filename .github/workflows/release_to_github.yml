@@ -1,10 +1,13 @@
-name: gitversion
+name: Release Project To Github
 
 on:
   push:
-    branches: [develop, master]
-  pull_request:
-    branches: [develop, master]
+    branches:
+      - master
+      - develop
+      - hotfix/*
+      - feature/*
+      - release/*
 
 jobs:
   build:
@@ -13,12 +16,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.301
+        
+      - name: Install dependencies
+        run: dotnet restore
+        
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.4
         with:
           versionSpec: "5.3.x"
+          
       - name: Fetch all history for all tags and branches
         run: git fetch --prune --unshallow
+        
       - name: Use GitVersion
         id: gitversion # step id used as reference for output values
         uses: gittools/actions/gitversion/execute@v0.9.4
@@ -53,3 +67,28 @@ jobs:
           echo "CommitsSinceVersionSource: ${{ steps.gitversion.outputs.commitsSinceVersionSource }}"
           echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.commitsSinceVersionSourcePadded }}"
           echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
+          
+      - name: dotnet tests
+        run: dotnet test /p:AssemblyVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.Sha }}
+
+      - name: dotnet publish 
+        run: dotnet publish --configuration release /p:AssemblyVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.Sha }}
+ 
+      - name: 7Zip gitversion exec
+        run: 7z a -t7z -mx=9 gitversion_exec.7z /home/runner/work/GitversionExec/GitversionExec/bin/Release/netcoreapp3.1/publish/
+      
+      - uses: actions/upload-artifact@v1
+        with:
+          name: "GitversionExec-${{ steps.gitversion.outputs.fullSemVer }}"
+          path: gitversion_exec.7z
+          
+      - name: Upload binaries to release
+        if: contains(github.ref, 'master')
+        uses: svenstaro/upload-release-action@v1-release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: gitversion_exec.7z
+          asset_name: GitversionExec.7z
+          tag: "${{ steps.gitversion.outputs.fullSemVer }}"
+          overwrite: true
+        

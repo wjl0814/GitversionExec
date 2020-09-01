@@ -75,6 +75,6 @@ jobs:
         run: dotnet publish --configuration release /p:AssemblyVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:FileVersion=${{ steps.gitversion.outputs.assemblySemFileVer }} /p:InformationalVersion=${{ steps.gitversion.outputs.Sha }}
  
       - name: 7Zip gitversion exec
-        run: 7z a -t7z -mx=9 gitversion_exec.7z ./GitversionExec/bin/release/netcoreapp3.1/publish/
+        run: 7z a -t7z -mx=9 gitversion_exec.7z ./bin/release/netcoreapp3.1/publish/
 
         
